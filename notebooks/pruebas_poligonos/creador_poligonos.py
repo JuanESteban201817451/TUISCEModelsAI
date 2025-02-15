@@ -10,6 +10,33 @@ from shapely.geometry import box
 # URL base para la API de poligonos de localidades en Bogotá
 url_base = "https://bogota-laburbano.opendatasoft.com/api/records/1.0/search/?dataset=poligonos-localidades&refine.Nombre+de+la+localidad="
 
+
+def extractor_poligonos_localidades(nombre_localidad: list, url_base=url_base) -> Polygon:
+    """
+    Extrae el polígono de una localidad específica en Bogotá, consultando una API pública y
+    devolviendo las coordenadas del polígono en formato `Polygon` de Shapely.
+
+    Args:
+        nombre_localidad (str): El nombre de la localidad cuyo polígono se desea extraer.
+        url_base (str): URL base de la API de la cual se extraen los datos. Por defecto, 
+                        apunta a la API de poligonos de localidades de Bogotá.
+
+    Returns:
+        Polygon: Un objeto `Polygon` de Shapely que contiene las coordenadas del polígono de la localidad.
+    """
+    # Procesar el nombre de la localidad
+    nombre_localidad = procesador_nombre_localidad(nombre_localidad)
+    
+    # Construir la URL final para la API usando el nombre de la localidad procesado
+    url = url_base + nombre_localidad
+    
+    # Hacer la solicitud HTTP a la API y obtener la respuesta en formato JSON
+    response = requests.get(url).json()
+    p=Polygon(response['records'][0]['fields']['geometry']['coordinates'][0][0])
+    p=reproyectar_poligono_a_metros(p)
+    # Extraer las coordenadas del polígono de la respuesta JSON y crear un objeto Polygon de Shapely
+    return p
+
 def procesador_nombre_localidad(nombre_localidad: str) -> str:
     """
     Procesa el nombre de una localidad eliminando tildes, espacios y convirtiendo a mayúsculas.
@@ -99,31 +126,3 @@ def subdivide_polygon_with_names(polygon, localidad_name, cell_size=50):
     
     # Retornar la lista de sub-polígonos válidos y sus nombres
     return sub_polygons, block_names
-
-
-
-def extractor_poligonos_localidades(nombre_localidad: list, url_base=url_base) -> Polygon:
-    """
-    Extrae el polígono de una localidad específica en Bogotá, consultando una API pública y
-    devolviendo las coordenadas del polígono en formato `Polygon` de Shapely.
-
-    Args:
-        nombre_localidad (str): El nombre de la localidad cuyo polígono se desea extraer.
-        url_base (str): URL base de la API de la cual se extraen los datos. Por defecto, 
-                        apunta a la API de poligonos de localidades de Bogotá.
-
-    Returns:
-        Polygon: Un objeto `Polygon` de Shapely que contiene las coordenadas del polígono de la localidad.
-    """
-    # Procesar el nombre de la localidad
-    nombre_localidad = procesador_nombre_localidad(nombre_localidad)
-    
-    # Construir la URL final para la API usando el nombre de la localidad procesado
-    url = url_base + nombre_localidad
-    
-    # Hacer la solicitud HTTP a la API y obtener la respuesta en formato JSON
-    response = requests.get(url).json()
-    p=Polygon(response['records'][0]['fields']['geometry']['coordinates'][0][0])
-    p=reproyectar_poligono_a_metros(p)
-    # Extraer las coordenadas del polígono de la respuesta JSON y crear un objeto Polygon de Shapely
-    return p
