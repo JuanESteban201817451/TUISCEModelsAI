@@ -4,10 +4,10 @@ import os
 import pyautogui
 import time
 # Propias
-from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux
+from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux, guardado_aux_2
 from src.utils.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen
 
-def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
+def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1):
     """
     Procesa un archivo KML en Google Earth Pro, ajusta la vista y guarda una imagen.
 
@@ -15,6 +15,7 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
         ruta_base (str): Ruta base donde se encuentran el archivo KML y la foto.
         nombre_foto (str, opcional): Nombre del archivo de la foto a cargar. 
                                      Por defecto, "2022_5".
+        tipo_guardado (int,optiona): tipo de Guardado
 
     Proceso:
         - Genera las rutas del archivo KML y la foto.
@@ -58,8 +59,12 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
     time.sleep(20)
 
     print("Guardando datos con combinación de teclas...")
-    guardado_aux()
-    time.sleep(21)
+    if tipo_guardado==1:
+        guardado_aux()
+        time.sleep(21)
+    if tipo_guardado==2: 
+        guardado_aux_2()
+        time.sleep(21)   
 
     print("Haciendo clic en botón específico...")
     hacer_clic_en_coordenadas(x=x_guardado_imagen, y=y_guardado_imagen)
