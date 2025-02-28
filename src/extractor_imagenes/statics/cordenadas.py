@@ -27,7 +27,6 @@ y_time_back = 142
 x_cierre_navegacion_foto=1401
 y_cierre_navegacion_foto=111
 
-
 # Cordenadas Boton guarde imagen
 x_guardado_imagen=1301
 y_guardado_imagen=112
