@@ -3,8 +3,6 @@ gee-tesis-a0f65918b305.json
 
 # Data
 # Ignorar todo el contenido dentro de data/
-data/*
-
 data/external/*
 data/interim/*
 data/processed/*
