@@ -4,6 +4,9 @@ gee-tesis-a0f65918b305.json
 # Data
 /data/
 
+# PERO NO ignorar Configuracion_base.geprint en data/raw/
+!data/raw/Configuracion_base.geprint
+
 # Config Rutas y cordenadas
 .config_coordenadas.json
 .config_rutas.json
