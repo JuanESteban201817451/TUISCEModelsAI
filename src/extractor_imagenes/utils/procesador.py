@@ -2,7 +2,7 @@ import os
 import pyautogui
 import time
 from utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux
-
+from statics.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen
 
 def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
     """
@@ -38,7 +38,7 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
     time.sleep(21)
 
     print("Haciendo clic en botón específico...")
-    hacer_clic_en_coordenadas(x=1301, y=112)
+    hacer_clic_en_coordenadas(x=x_guardado_imagen, y=y_guardado_imagen)
     time.sleep(24)
 
     print("Escribiendo ruta de la foto y cargándola...")
@@ -48,7 +48,7 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
     time.sleep(24)
 
     print("Haciendo clic en segundo botón específico...")
-    hacer_clic_en_coordenadas(x=1401, y=111)
+    hacer_clic_en_coordenadas(x=x_cierre_navegacion_foto, y=y_cierre_navegacion_foto)
     time.sleep(10)
 
     print("Eliminando con tecla Suprimir...")
