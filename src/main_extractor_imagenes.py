@@ -22,10 +22,19 @@ def main():
         default="2022_5",
         help="Nombre del archivo de la foto (por defecto:2022_5)."
     )
+    parser.add_argument(
+        "--tipo_guardado",
+        default=1,
+        type=int,
+        help="Tipo de Guardado recistido por el Dispostivo."
+    )
+
 
     args = parser.parse_args()
     ruta_base = args.ruta_base
     nombre_foto = args.nombre_foto
+    tipo_guardado=args.tipo_guardado
+
     # Contador para saber cuántas veces procesamos una imagen
     contador_procesadas = 0
 
@@ -55,7 +64,7 @@ def main():
                     # Incia el proceso
                     if contador_procesadas == 1 or (contador_procesadas % 40 == 0):
                         time.sleep(5)  # Espera 5 segundos
-                        inicializador_and_config(foto_range=foto_range)
+                        inicializador_and_config(foto_range=foto_range, tipo_guardado=tipo_guardado)
                         time.sleep(9)  # Espera 5 segundos
                         inicio = time.time()
                         hora=obtener_fecha_hora_para_nombre()
@@ -65,7 +74,7 @@ def main():
                             archivo.write(str(ruta_subcarpeta))
 
                     ## Procesa los poligonos
-                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto)
+                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto, tipo_guardado=tipo_guardado)
 
                     # cierra uno antes de los multiplos de 40.
                     if ((contador_procesadas+1) % 40) == 0:

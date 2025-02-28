@@ -4,7 +4,8 @@ import argparse
 # Propias
 from src.utils.query_poligonos import extractor_poligonos_localidades, creador_poligono_municipio
 from src.utils.utils_poligonos import crear_diccionario_subpoligonos, filtrar_poligonos_por_distancia, creardor_carpetas_y_kmls
-from src.statics.list_dict import archivo_mun_gp, municipio_gp, lista_localidades_bogota_gp, url_base_gp, lista_localidades_estaciones_a_comparar_gp, distancia_maxima_gp, base_path_gp
+from src.utils.directorios_rutas import base_path_gp
+from src.statics.list_dict import archivo_mun_gp, municipio_gp, lista_localidades_bogota_gp, url_base_gp, lista_localidades_estaciones_a_comparar_gp, distancia_maxima_gp
 
 # Main
 def main(archivo_mun: str, 

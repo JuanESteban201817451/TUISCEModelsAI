@@ -109,3 +109,14 @@ def guardado_aux():
         time.sleep(1)
     pyautogui.press("enter")  # Confirma el guardado
     print("Datos guardados.")
+
+def guardado_aux_2():
+    """
+    Guarda datos en Google Earth Pro a través del menú de archivo.
+
+    Retorna:
+        None
+    """
+    print("Guardando datos mediante el menú de archivo...")
+    pyautogui.hotkey('alt', 'f', 's')  # Abre el menú "Archivo"
+    time.sleep(1)

@@ -1,4 +1,5 @@
 {
     "google_earth": "C:\\Program Files\\Google\\Google Earth Pro\\client\\googleearth.exe",
-    "repair_tool": "C:\\Program Files\\Google\\Google Earth Pro\\client\\repair_tool.exe"
+    "repair_tool": "C:\\Program Files\\Google\\Google Earth Pro\\client\\repair_tool.exe",
+    "base_path_gp":"D:\\Tesis_JE_fotos"
 }

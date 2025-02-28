@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 
 # Propias
-from src.utils.helpers import guardado_aux, hacer_clic_en_coordenadas
+from src.utils.helpers import guardado_aux,guardado_aux_2, hacer_clic_en_coordenadas
 from src.utils.cordenadas import (
     x_borrar_cache, y_borrar_cache,
     x_load_map_config, y_load_map_config,
@@ -50,7 +50,8 @@ def guardar_y_cargar_configuracion(
     x_load_config_confirm: int,
     y_load_config_confirm: int,
     x_cierre_foto: int,
-    y_cierre_foto: int
+    y_cierre_foto: int,
+    tipo_guardado:int=1,
 ) -> None:
     """
     Guarda la configuración actual (por ejemplo, la imagen o los ajustes) y luego
@@ -89,8 +90,12 @@ def guardar_y_cargar_configuracion(
     """
     # Guardar configuración (presionando las teclas necesarias)
     print("Guardando datos con combinación de teclas...")
-    guardado_aux()
+    time.sleep(2)
+    if tipo_guardado==1:
+        guardado_aux()
     time.sleep(10)
+    if tipo_guardado==2:
+        guardado_aux_2()
 
     print("Abriendo opciones de configuración...")
     hacer_clic_en_coordenadas(x_load_config, y_load_config)
@@ -156,7 +161,8 @@ def retroceder_tiempo(
         hacer_clic_en_coordenadas(x_time_back_coord, y_time_back_coord)
         time.sleep(4)
 
-def inicializador_and_config(foto_range: int) -> None:
+def inicializador_and_config(foto_range: int,
+                             tipo_guardado:int) -> None:
     """
     Función principal que orquesta la apertura de Google Earth,
     la carga de configuración de mapas y el retroceso de tiempo 
@@ -184,7 +190,8 @@ def inicializador_and_config(foto_range: int) -> None:
         x_load_config_confirm=x_load_map_config_confirm,
         y_load_config_confirm=y_load_map_config_confirm,
         x_cierre_foto=x_cierre_navegacion_foto,
-        y_cierre_foto=y_cierre_navegacion_foto
+        y_cierre_foto=y_cierre_navegacion_foto,
+        tipo_guardado=tipo_guardado
     )
 
     # 3. Retroceder tiempo en el historial de imágenes
