@@ -2,8 +2,8 @@
 import argparse
 
 # propias
-from utils.utils_info_dane import download_file,descomprimir_zip
-from statics.list_dict import default_urls_dsh, default_ruta_zip_dsh,default_carpeta_destino_zip_dsh
+from src.utils.utils_info_dane import download_file,descomprimir_zip
+from src.statics.list_dict import default_urls_dsh, default_ruta_zip_dsh,default_carpeta_destino_zip_dsh
 
 # Main
 def main(urls, ruta_zip, carpeta_destino_zip):
