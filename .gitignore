@@ -6,7 +6,6 @@ gee-tesis-a0f65918b305.json
 
 # No ignorar las carpetas dentro de data/
 !data/
-data/*
 !data/external/
 !data/interim/
 !data/processed/
@@ -20,6 +19,7 @@ data/external/*
 data/interim/*
 data/processed/*
 data/raw/*
+data/*
 
 # Config Rutas y cordenadas
 .config_coordenadas.json
