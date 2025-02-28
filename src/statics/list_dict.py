@@ -78,6 +78,3 @@ for localidad, estaciones in estaciones_transmicable_gp.items():
             "Diccionario de estaciones": estaciones
         }
         lista_localidades_estaciones_a_comparar_gp.append(estructura)
-
-### Ruta base a la carpeta de interes donde se va a guardar los archivos
-base_path_gp=r"D:\Tesis_JE_fotos"
