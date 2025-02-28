@@ -2,9 +2,15 @@
 gee-tesis-a0f65918b305.json
 
 # Data
-/data/
+# Ignorar todo el contenido dentro de data/
+data/*
 
-# PERO NO ignorar Configuracion_base.geprint en data/raw/
+data/external/*
+data/interim/*
+data/processed/*
+data/raw/*
+
+# No ignorar el archivo específico en data/raw/
 !data/raw/Configuracion_base.geprint
 
 # Config Rutas y cordenadas
