@@ -1,25 +1,31 @@
 # Archivo de credenciales
 gee-tesis-a0f65918b305.json
 
-# Data
-# Ignorar todo el contenido dentro de data/
+# Ignorar todo dentro de la carpeta data/
+data/*
 
-# No ignorar las carpetas dentro de data/
+# No ignorar las carpetas dentro de data/ (mantener la estructura)
 !data/
 !data/external/
 !data/interim/
 !data/processed/
 !data/raw/
 
-# Permitir el archivo específico en data/raw/
+# No ignorar el archivo específico en data/raw/
 !data/raw/Configuracion_base.geprint
 
-# Ignorar todo dentro de las carpetas (excepto si hay archivos permitidos)
+# Ignorar todo dentro de cada subcarpeta (pero sin ocultar su existencia)
 data/external/*
 data/interim/*
 data/processed/*
 data/raw/*
-data/*
+
+# Permitir archivos ocultos para mantener las carpetas visibles en Git
+!data/external/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/raw/.gitkeep
+
 
 # Config Rutas y cordenadas
 .config_coordenadas.json
