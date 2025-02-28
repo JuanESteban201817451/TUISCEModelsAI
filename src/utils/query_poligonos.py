@@ -1,3 +1,5 @@
+# bibliotecas
+# Externas
 from typing import List, Dict
 import requests
 from shapely.geometry import Polygon, MultiPolygon
@@ -6,7 +8,6 @@ import geopandas as gpd
 
 # URL base para la API de poligonos de localidades en Bogotá
 url_base = "https://bogota-laburbano.opendatasoft.com/api/records/1.0/search/?dataset=poligonos-localidades&refine.Nombre+de+la+localidad="
-
 
 def extractor_poligonos_localidades(nombres_localidades: List[str],
                                     url_base: str = url_base) -> Dict[str, Dict]:
@@ -68,7 +69,6 @@ def extractor_poligonos_localidades(nombres_localidades: List[str],
             print(f"Formato de coordenadas inválido para {nombre_localidad_procesado}. Error: {e}")
 
     return resultados
-
 
 def procesador_nombre_localidad(nombre_localidad: str) -> str:
     """

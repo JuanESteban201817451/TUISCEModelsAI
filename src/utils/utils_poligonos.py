@@ -1,14 +1,15 @@
-# Bibliotecas estándar
+# Bibliotecas
+# Externas
 from math import radians, cos, sin, sqrt, atan2  # Para cálculos matemáticos como la fórmula de haversine
 from typing import Union, List, Dict,Any, Optional  # Para anotaciones de tipos en funciones
 from itertools import cycle
 import os
-# Bibliotecas de terceros para trabajar con geometrías y datos espaciales
 from shapely.geometry import box, Polygon, MultiPolygon  # Para manipulación de geometrías (polígonos, multipolígonos)
 import geopandas as gpd  # Para manejo de datos espaciales y operaciones GIS
 import folium # para crear el mapa
 import simplekml
 
+# Funciones
 def dividir_poligono(poligono: Union[Polygon, MultiPolygon], tamano_m: int = 200) -> List[Polygon]:
     """
     Divide un polígono o multipolígono en una grilla de subpolígonos cuadrados de tamaño tamano_m x tamano_m (en metros),
@@ -50,7 +51,6 @@ def dividir_poligono(poligono: Union[Polygon, MultiPolygon], tamano_m: int = 200
 
     return gdf_subpoligonos.geometry.tolist()
 
-
 def crear_diccionario_subpoligonos(poligonos_localidades: Dict[str, Dict],
                                    tamano_m: int = 200) -> Dict[str, Dict[str, Dict]]:
     """
@@ -86,7 +86,6 @@ def crear_diccionario_subpoligonos(poligonos_localidades: Dict[str, Dict],
 
     return diccionario
 
-
 def haversine(lat1: float,
               lon1: float,
               lat2: float,
@@ -110,7 +109,6 @@ def haversine(lat1: float,
     a = sin(delta_phi / 2) ** 2 + cos(phi1) * cos(phi2) * sin(delta_lambda / 2) ** 2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     return R * c
-
 
 def calcular_centroide(polygon: dict) -> tuple:
     """
@@ -144,8 +142,6 @@ def calcular_centroide(polygon: dict) -> tuple:
         coords = polygon['coordinates'][0]
     x, y = zip(*coords)  # Separar latitudes (y) y longitudes (x)
     return sum(y) / len(y), sum(x) / len(x)  # Retorna (latitud, longitud)
-
-from typing import Dict
 
 def filtrar_poligonos_por_distancia(
     localidad: str,
@@ -214,9 +210,6 @@ def filtrar_poligonos_por_distancia(
 
     return poligonos_filtrados
 
-
-
-
 def creador_mapa(
     diccionario_poligonos: Dict[str, Any],
     diccionario_sub_poligonos: Optional[Dict[str, Dict[str, Any]]] = None,
@@ -276,10 +269,29 @@ def creador_mapa(
 
     return m
 
-
-
 # Ruta base donde se crearán las carpetas
-def creardor_carpetas_y_kmls(conjunto_total:list[dict],base_path:str = r"D:\Tesis_JE_fotos"):
+def creardor_carpetas_y_kmls(conjunto_total: list[dict], base_path: str = r"D:\Tesis_JE_fotos"):
+    """
+    Crea carpetas y archivos KML a partir de un conjunto de datos geoespaciales.
+
+    Parámetros:
+        conjunto_total (list[dict]): Lista de diccionarios que contienen información geoespacial.
+        base_path (str, opcional): Ruta base donde se crearán las carpetas. 
+                                   Por defecto, "D:\Tesis_JE_fotos".
+
+    Proceso:
+        - Para cada subpolígono en el conjunto de datos:
+            - Crea una estructura de carpetas siguiendo la jerarquía:
+                base_path / localidad / estacion_cercana / nombre
+            - Genera un archivo KML con la geometría (Polygon o MultiPolygon).
+            - Guarda un archivo de texto con los datos del subpolígono.
+
+    Retorna:
+        None
+
+    Ejemplo de uso:
+        creardor_carpetas_y_kmls(datos_geoespaciales, "C:/Usuarios/Usuario/Mapas")
+    """
     for subpoligonos_cercanos in conjunto_total:
         print("Su ruta base será el lugar donde se descargarán y generarán las carpetas para almacenar los archivos. Se recomienda usar una unidad externa o una carpeta con suficiente espacio de almacenamiento.")
         # Crear las carpetas y archivos necesarios

@@ -1,3 +1,5 @@
+# bibliotecas
+# Externas
 import requests
 import aspose.zip as az
 import zipfile
@@ -39,6 +41,19 @@ def download_file(url, save_path):
 
 # Función para descomprimir archivos .zip
 def descomprimir_zip(ruta_zip, carpeta_destino):
+    """
+    Descomprime un archivo .zip en una carpeta de destino específica.
+
+    Parámetros:
+        ruta_zip (str): Ruta completa del archivo .zip a descomprimir.
+        carpeta_destino (str): Ruta de la carpeta donde se extraerán los archivos.
+
+    Retorna:
+        None
+
+    Ejemplo:
+        descomprimir_zip("datos.zip", "carpeta_extraida/")
+    """
     with zipfile.ZipFile(ruta_zip, 'r') as zip_ref:
         zip_ref.extractall(carpeta_destino)
     print(f"Archivo {ruta_zip} descomprimido en {carpeta_destino}")
