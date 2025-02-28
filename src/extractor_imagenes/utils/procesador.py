@@ -3,6 +3,7 @@ import pyautogui
 import time
 from utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux
 
+
 def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
     """
     Función para procesar un archivo KML en Google Earth Pro y realizar las acciones necesarias.
@@ -30,21 +31,21 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
 
     print("Ajustando vista cenital nuevamente...")
     click_centro_vista_cenital()
-    time.sleep(22)
+    time.sleep(20)
 
     print("Guardando datos con combinación de teclas...")
     guardado_aux()
-    time.sleep(22)
+    time.sleep(21)
 
     print("Haciendo clic en botón específico...")
     hacer_clic_en_coordenadas(x=1301, y=112)
-    time.sleep(30)
+    time.sleep(24)
 
     print("Escribiendo ruta de la foto y cargándola...")
     pyautogui.typewrite(ruta_foto)
     time.sleep(8)
     pyautogui.press("enter")
-    time.sleep(31)
+    time.sleep(24)
 
     print("Haciendo clic en segundo botón específico...")
     hacer_clic_en_coordenadas(x=1401, y=111)
@@ -52,7 +53,7 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5"):
 
     print("Eliminando con tecla Suprimir...")
     pyautogui.press('delete')
-    time.sleep(7)
+    time.sleep(6)
     pyautogui.press("enter")
     print("Proceso completado.")
-    time.sleep(12)
+    time.sleep(5)
