@@ -28,8 +28,8 @@ data/raw/*
 
 
 # Config Rutas y cordenadas
-config_coordenadas.json
-config_rutas.json
+/config_coordenadas.json
+/config_rutas.json
 
 # Mac OS-specific storage files
 .DS_Store
