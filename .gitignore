@@ -1,5 +1,7 @@
 # Archivo de credenciales
 gee-tesis-a0f65918b305.json
+config_coordenadas.json
+config_rutas.json
 
 # Ignorar todo dentro de la carpeta data/
 data/*
@@ -28,8 +30,7 @@ data/raw/*
 
 
 # Config Rutas y cordenadas
-/config_coordenadas.json
-/config_rutas.json
+
 
 # Mac OS-specific storage files
 .DS_Store
