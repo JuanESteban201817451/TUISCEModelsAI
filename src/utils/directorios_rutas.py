@@ -12,8 +12,5 @@ with open(os.path.join(ruta_proyecto, "config_rutas.json"), "r", encoding="utf-8
 # Asignar cada ruta a su variable correspondiente
 ruta_google_earth = rutas["google_earth"]
 ruta_repair_tool = rutas["repair_tool"]
+base_path_gp=rutas["base_path_gp"]
 ruta_config_mapa = os.path.join(ruta_proyecto, "data", "raw", "Configuracion_base.geprint")
-
-# Verificación
-print("Ruta base del proyecto:", ruta_proyecto)
-print("Ruta configuración mapa:", ruta_config_mapa)

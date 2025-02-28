@@ -8,7 +8,6 @@ import os
 # Importamos las funciones y constantes que ya tienes en tu proyecto.
 from helpers import guardado_aux, hacer_clic_en_coordenadas
 from src.utils.cordenadas import (
-    x_borrar_cache, y_borrar_cache,  # Si los necesitas, puedes usarlos.
     x_load_map_config, y_load_map_config,
     x_load_map_config_load, y_load_map_config_load,
     x_load_map_config_confirm, y_load_map_config_confirm,
@@ -17,7 +16,7 @@ from src.utils.cordenadas import (
     x_cierre_navegacion_foto, y_cierre_navegacion_foto
 )
 from src.utils.directorios_rutas import (
-    ruta_google_earth, ruta_config_mapa, ruta_repair_tool
+    ruta_google_earth, ruta_config_mapa
 )
 
 
