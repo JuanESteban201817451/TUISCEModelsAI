@@ -2,7 +2,28 @@
 gee-tesis-a0f65918b305.json
 
 # Data
-/data/
+# Ignorar todo el contenido dentro de data/
+
+# No ignorar las carpetas dentro de data/
+!data/
+!data/external/
+!data/interim/
+!data/processed/
+!data/raw/
+
+# Permitir el archivo específico en data/raw/
+!data/raw/Configuracion_base.geprint
+
+# Ignorar todo dentro de las carpetas (excepto si hay archivos permitidos)
+data/external/*
+data/interim/*
+data/processed/*
+data/raw/*
+data/*
+
+# Config Rutas y cordenadas
+.config_coordenadas.json
+.config_rutas.json
 
 # Mac OS-specific storage files
 .DS_Store

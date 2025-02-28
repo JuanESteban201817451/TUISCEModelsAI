@@ -1,11 +1,14 @@
+# Externas
 import os 
 import argparse
-from utils.procesador import procesar_kml_y_foto
-from utils.init_closer import inicializador_and_config, limpiar_y_cerrar_earth, tomar_captura, obtener_fecha_hora_para_nombre
-from statics.diccionario_time import diccionario_tiempo
 import time
 import json
+# Propias
+from src.utils.procesador import procesar_kml_y_foto
+from src.utils.init_closer import inicializador_and_config, limpiar_y_cerrar_earth, tomar_captura, obtener_fecha_hora_para_nombre
+from src.statics.diccionario_time import diccionario_tiempo
 
+# Main
 def main():
     # Configurar el parser de argumentos
     parser = argparse.ArgumentParser(description="Procesar archivos KML y fotos desde una ruta específica.")
@@ -81,7 +84,6 @@ def main():
                     print(f"Error procesando {ruta_subcarpeta}: {e}")
             else:
                 print(f"{ruta_subcarpeta} no es una carpeta. Ignorando...")        
-
 
 if __name__ == "__main__":
     main()

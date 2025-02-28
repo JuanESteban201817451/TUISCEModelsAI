@@ -1,7 +1,11 @@
+# Externas
 import argparse
-from utils.utils_info_dane import *
+
+# propias
+from utils.utils_info_dane import download_file,descomprimir_zip
 from statics.list_dict import default_urls_dsh, default_ruta_zip_dsh,default_carpeta_destino_zip_dsh
 
+# Main
 def main(urls, ruta_zip, carpeta_destino_zip):
     """
     Descarga y descomprime archivos desde las URLs proporcionadas.
@@ -19,7 +23,6 @@ def main(urls, ruta_zip, carpeta_destino_zip):
     if ruta_zip.endswith('.zip'):
         descomprimir_zip(ruta_zip, carpeta_destino_zip)
         
-
 if __name__ == "__main__":
     # Configurar los argumentos de la línea de comandos
     parser = argparse.ArgumentParser(description="Descargar y descomprimir archivos desde URLs.")

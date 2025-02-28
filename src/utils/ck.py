@@ -1,3 +1,5 @@
+# bibliotecas
+# Externas
 import pyautogui
 import time
 

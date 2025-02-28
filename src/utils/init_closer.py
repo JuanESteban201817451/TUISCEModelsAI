@@ -1,11 +1,14 @@
 # Bibliotecas
+# Externas
 import subprocess
 import time
 import pyautogui
 import os
-# Importamos las funciones y constantes.
-from utils.helpers import guardado_aux, hacer_clic_en_coordenadas
-from statics.cordenadas import (
+from datetime import datetime
+
+# Propias
+from src.utils.helpers import guardado_aux, hacer_clic_en_coordenadas
+from src.utils.cordenadas import (
     x_borrar_cache, y_borrar_cache,
     x_load_map_config, y_load_map_config,
     x_load_map_config_load, y_load_map_config_load,
@@ -15,10 +18,9 @@ from statics.cordenadas import (
     x_cierre_navegacion_foto, y_cierre_navegacion_foto
 )
 
-from statics.directorios_rutas import (
+from src.utils.directorios_rutas import (
     ruta_google_earth, ruta_config_mapa, ruta_repair_tool
 )
-
 
 def abrir_google_earth(ruta_ejecutable: str) -> subprocess.Popen:
     """
@@ -38,7 +40,6 @@ def abrir_google_earth(ruta_ejecutable: str) -> subprocess.Popen:
     print("Google Earth Pro se ha iniciado...")
     time.sleep(30)  # Espera 30 segundos para que la aplicación termine de cargar
     return proceso
-
 
 def guardar_y_cargar_configuracion(
     ruta_mapa: str,
@@ -113,7 +114,6 @@ def guardar_y_cargar_configuracion(
     hacer_clic_en_coordenadas(x_cierre_foto, y_cierre_foto)
     time.sleep(10)
 
-
 def retroceder_tiempo(
     rango_fotos: int,
     x_time_coord: int,
@@ -156,7 +156,6 @@ def retroceder_tiempo(
         hacer_clic_en_coordenadas(x_time_back_coord, y_time_back_coord)
         time.sleep(4)
 
-
 def inicializador_and_config(foto_range: int) -> None:
     """
     Función principal que orquesta la apertura de Google Earth,
@@ -196,8 +195,6 @@ def inicializador_and_config(foto_range: int) -> None:
         x_time_back_coord=x_time_back,
         y_time_back_coord=y_time_back
     )
-
-
 
 ### limpiadro cache
 def limpiar_y_cerrar_earth(
@@ -245,9 +242,25 @@ def limpiar_y_cerrar_earth(
     pyautogui.hotkey("alt", "f4")
     print("Google Earth Repair Tool se ha cerrado.")
 
+def tomar_captura(ruta_destino: str):
+    """
+    Toma una captura de pantalla y la guarda en la ruta especificada.
 
-def tomar_captura(ruta_destino):
-    # Esperar unos segundos antes de tomar la captura (por ejemplo 3s).
+    Parámetros:
+        ruta_destino (str): Ruta donde se guardará la captura de pantalla.
+
+    Proceso:
+        - Espera 3 segundos antes de capturar la pantalla.
+        - Toma una captura de pantalla completa.
+        - Guarda la captura en la ruta especificada.
+
+    Retorna:
+        None
+
+    Ejemplo de uso:
+        tomar_captura("D:/capturas/screenshot.png")
+    """
+    # Esperar unos segundos antes de tomar la captura (por ejemplo, 3s).
     time.sleep(3)
     
     # Toma la captura de pantalla.
@@ -258,14 +271,29 @@ def tomar_captura(ruta_destino):
     print(f"Captura de pantalla guardada en: {ruta_destino}")
 
 
-from datetime import datetime
-
 def obtener_fecha_hora_para_nombre():
+    """
+    Obtiene la fecha y hora actual en un formato adecuado para nombres de archivos.
+
+    Formato de salida:
+        "YYYY_MM_DD_HH" (Año_Mes_Día_Hora)
+
+    Proceso:
+        - Obtiene la fecha y hora actual del sistema.
+        - Formatea la fecha en el estilo "2025_02_23_17".
+
+    Retorna:
+        str: Nombre formateado con fecha y hora.
+
+    Ejemplo de uso:
+        nombre_archivo = obtener_fecha_hora_para_nombre()
+        print(nombre_archivo)  # Salida: "2025_02_23_17"
+    """
     # Obtenemos la fecha y hora actual
     fecha_hora_actual = datetime.now()
     
     # Formateamos la fecha y hora para que cada campo esté separado por '_'
-    # Resultado del estilo: "2025_02_23_17_05_30"
-    nombre_formateado = fecha_hora_actual.strftime("%Y_%m_%d_%H")
-    
+    # Resultado del estilo: "2025_02_23_17"
+    nombre_formateado = fecha_hora_actual.strftime("%Y_%m_%d_%H")    
     return nombre_formateado
+

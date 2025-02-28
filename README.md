@@ -60,3 +60,7 @@ Research on the impact of transport improvements, such as the Metro Cable, on th
 
 --------
 
+## Corrida
+python -m src.main_extractor_imagenes --ruta_base "D:\Tesis_JE_fotos\SOACHA" --nombre_foto "2020_3"
+
+
