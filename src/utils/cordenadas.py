@@ -16,3 +16,7 @@ x_time_back, y_time_back = coordenadas["time_back"]["x"], coordenadas["time_back
 x_cierre_navegacion_foto, y_cierre_navegacion_foto = coordenadas["cierre_navegacion_foto"]["x"], coordenadas["cierre_navegacion_foto"]["y"]
 x_guardado_imagen, y_guardado_imagen = coordenadas["guardado_imagen"]["x"], coordenadas["guardado_imagen"]["y"]
 
+x_boton_file,y_boton_file=coordenadas["boton_file"]["x"], coordenadas["boton_file"]["y"]
+x_boton_save,y_boton_save=coordenadas["boton_save"]["x"], coordenadas["boton_save"]["y"]
+x_boton_save_imag,y_boton_save_imag=coordenadas["boton_save_imag"]["x"], coordenadas["boton_save_imag"]["y"]
+

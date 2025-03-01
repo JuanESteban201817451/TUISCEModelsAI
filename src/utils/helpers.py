@@ -119,4 +119,26 @@ def guardado_aux_2():
     """
     print("Guardando datos mediante el menú de archivo...")
     pyautogui.hotkey('alt', 'f', 's')  # Abre el menú "Archivo"
-    time.sleep(1)
+    time.sleep(3)
+
+
+def guardado_aux_3(x_boton_file:int,
+                   y_boton_file:int,
+                   x_boton_save:int,
+                   y_boton_save:int,
+                   x_boton_save_imag:int,
+                   y_boton_save_imag:int):
+    """
+    Guarda datos en Google Earth Pro a través del menú de archivo.
+
+    Retorna:
+        None
+    """
+    print("Guardando datos mediante el menú de archivo...")
+    hacer_clic_en_coordenadas(x_boton_file, y_boton_file)
+    time.sleep(4)
+    hacer_clic_en_coordenadas(x_boton_save, y_boton_save)
+    time.sleep(4)
+    hacer_clic_en_coordenadas(x_boton_save_imag, y_boton_save_imag)
+    time.sleep(4)
+

@@ -7,7 +7,8 @@ import os
 from datetime import datetime
 
 # Propias
-from src.utils.helpers import guardado_aux,guardado_aux_2, hacer_clic_en_coordenadas
+from src.utils.helpers import guardado_aux,guardado_aux_2,guardado_aux_3, hacer_clic_en_coordenadas
+
 from src.utils.cordenadas import (
     x_borrar_cache, y_borrar_cache,
     x_load_map_config, y_load_map_config,
@@ -15,7 +16,10 @@ from src.utils.cordenadas import (
     x_load_map_config_confirm, y_load_map_config_confirm,
     x_time, y_time,
     x_time_back, y_time_back,
-    x_cierre_navegacion_foto, y_cierre_navegacion_foto
+    x_cierre_navegacion_foto, y_cierre_navegacion_foto,
+    x_boton_file,y_boton_file,
+    x_boton_save,y_boton_save,
+    x_boton_save_imag,y_boton_save_imag
 )
 
 from src.utils.directorios_rutas import (
@@ -96,6 +100,13 @@ def guardar_y_cargar_configuracion(
     time.sleep(10)
     if tipo_guardado==2:
         guardado_aux_2()
+    if tipo_guardado==3:
+        guardado_aux_3(x_boton_file=x_boton_file,
+                       y_boton_file=y_boton_file,
+                       x_boton_save=x_boton_save,
+                       y_boton_save=y_boton_save,
+                       x_boton_save_imag=x_boton_save_imag,
+                       y_boton_save_imag=y_boton_save_imag)
 
     print("Abriendo opciones de configuración...")
     hacer_clic_en_coordenadas(x_load_config, y_load_config)

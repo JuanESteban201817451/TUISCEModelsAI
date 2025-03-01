@@ -5,7 +5,7 @@ import pyautogui
 import time
 # Propias
 from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux, guardado_aux_2
-from src.utils.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen
+from src.utils.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen, x_boton_file,y_boton_file, x_boton_save,y_boton_save,x_boton_save_imag,y_boton_save_imag
 
 def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1):
     """
@@ -64,7 +64,14 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardad
         time.sleep(21)
     if tipo_guardado==2: 
         guardado_aux_2()
-        time.sleep(21)   
+        time.sleep(21)
+    if tipo_guardado==3:
+        guardado_aux_3(x_boton_file=x_boton_file,
+                       y_boton_file=y_boton_file,
+                       x_boton_save=x_boton_save,
+                       y_boton_save=y_boton_save,
+                       x_boton_save_imag=x_boton_save_imag,
+                       y_boton_save_imag=y_boton_save_imag)
 
     print("Haciendo clic en botón específico...")
     hacer_clic_en_coordenadas(x=x_guardado_imagen, y=y_guardado_imagen)
