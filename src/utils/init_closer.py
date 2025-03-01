@@ -97,9 +97,10 @@ def guardar_y_cargar_configuracion(
     time.sleep(2)
     if tipo_guardado==1:
         guardado_aux()
-    time.sleep(10)
+        time.sleep(10)
     if tipo_guardado==2:
         guardado_aux_2()
+        time.sleep(10)
     if tipo_guardado==3:
         guardado_aux_3(x_boton_file=x_boton_file,
                        y_boton_file=y_boton_file,
@@ -107,6 +108,7 @@ def guardar_y_cargar_configuracion(
                        y_boton_save=y_boton_save,
                        x_boton_save_imag=x_boton_save_imag,
                        y_boton_save_imag=y_boton_save_imag)
+        time.sleep(10)
 
     print("Abriendo opciones de configuración...")
     hacer_clic_en_coordenadas(x_load_config, y_load_config)
