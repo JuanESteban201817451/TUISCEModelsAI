@@ -65,7 +65,7 @@ def main():
                     if contador_procesadas == 1 or (contador_procesadas % 40 == 0):
                         time.sleep(5)  # Espera 5 segundos
                         inicializador_and_config(foto_range=foto_range, tipo_guardado=tipo_guardado)
-                        time.sleep(9)  # Espera 5 segundos
+                        time.sleep(10)  # Espera 5 segundos
                         inicio = time.time()
                         hora=obtener_fecha_hora_para_nombre()
                         tomar_captura(ruta_destino=fr'.\data\interim\comprobador\comprobador_{nombre_foto}_{hora}.png')
@@ -80,7 +80,7 @@ def main():
                     if ((contador_procesadas+1) % 40) == 0:
                         time.sleep(5)  # Espera 5 segundos
                         limpiar_y_cerrar_earth()
-                        time.sleep(9)  # Espera 5 segundos
+                        time.sleep(10)  # Espera 5 segundos
                         fin = time.time()
                         total=fin-inicio
                         dicci_time={'inicio':inicio,
