@@ -2,12 +2,14 @@
 # Externas
 import os
 import pyautogui
+import pyperclip
 import time
+import math
 # Propias
-from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux, guardado_aux_2
+from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux, guardado_aux_2, guardado_aux_3
 from src.utils.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen, x_boton_file,y_boton_file, x_boton_save,y_boton_save,x_boton_save_imag,y_boton_save_imag
 
-def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1):
+def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1, dilatador_tiempo=1):
     """
     Procesa un archivo KML en Google Earth Pro, ajusta la vista y guarda una imagen.
 
@@ -46,50 +48,66 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardad
         return
     
     print("Cargando archivo KML...")
-    cargar_archivo_kml(ruta_kml)
+    cargar_archivo_kml(ruta_kml, dilatador_tiempo=dilatador_tiempo)
 
     print("Ajustando vista cenital inicial...")
-    click_centro_vista_cenital()
+    click_centro_vista_cenital(dilatador_tiempo=dilatador_tiempo)
 
     print("Aumentando zoom con tecla '='...")
-    mantener_tecla_oprimida('=', duracion=1, intentos=16)
+    mantener_tecla_oprimida('=', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
 
     print("Ajustando vista cenital nuevamente...")
-    click_centro_vista_cenital()
-    time.sleep(20)
+    click_centro_vista_cenital(dilatador_tiempo=dilatador_tiempo)
+    time.sleep(math.ceil(20*dilatador_tiempo))
 
     print("Guardando datos con combinación de teclas...")
     if tipo_guardado==1:
         guardado_aux()
-        time.sleep(21)
+        time.sleep(math.ceil(21*dilatador_tiempo))
     if tipo_guardado==2: 
         guardado_aux_2()
-        time.sleep(21)
+        time.sleep(math.ceil(21*dilatador_tiempo))
     if tipo_guardado==3:
         guardado_aux_3(x_boton_file=x_boton_file,
                        y_boton_file=y_boton_file,
                        x_boton_save=x_boton_save,
                        y_boton_save=y_boton_save,
                        x_boton_save_imag=x_boton_save_imag,
-                       y_boton_save_imag=y_boton_save_imag)
+                       y_boton_save_imag=y_boton_save_imag,
+                       dilatador_tiempo=dilatador_tiempo)
 
     print("Haciendo clic en botón específico...")
     hacer_clic_en_coordenadas(x=x_guardado_imagen, y=y_guardado_imagen)
-    time.sleep(24)
+    time.sleep(math.ceil(35*dilatador_tiempo))
 
     print("Escribiendo ruta de la foto y cargándola...")
-    pyautogui.typewrite(ruta_foto)
-    time.sleep(8)
+    print(ruta_foto)
+
+
+    # Copiar al portapapeles
+    pyperclip.copy(ruta_foto)
+
+    # Simular Ctrl + V para pegar
+    pyautogui.hotkey("ctrl", "v")
+
+    # Presionar Enter si es necesario
+    #pyautogui.press("enter")
+    #pyautogui.typewrite(ruta_foto,interval=0.2)
+
+
+
+
+    time.sleep(math.ceil(15*dilatador_tiempo))
     pyautogui.press("enter")
-    time.sleep(24)
+    time.sleep(math.ceil(20*dilatador_tiempo))
 
     print("Haciendo clic en segundo botón específico...")
     hacer_clic_en_coordenadas(x=x_cierre_navegacion_foto, y=y_cierre_navegacion_foto)
-    time.sleep(10)
+    time.sleep(math.ceil(10*dilatador_tiempo))
 
     print("Eliminando con tecla Suprimir...")
     pyautogui.press('delete')
-    time.sleep(6)
+    time.sleep(math.ceil(8*dilatador_tiempo))
     pyautogui.press("enter")
     print("Proceso completado.")
-    time.sleep(5)
+    time.sleep(math.ceil(5*dilatador_tiempo))

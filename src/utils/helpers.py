@@ -2,13 +2,16 @@
 # Externas
 import pyautogui  # Biblioteca para automatización de la GUI
 import time  # Biblioteca para manejar tiempos de espera
+import math # Biblioteca para calculos matematicos
 
-def cargar_archivo_kml(ruta_kml: str):
+def cargar_archivo_kml(ruta_kml: str,
+                       dilatador_tiempo:float):
     """
     Carga un archivo KML en Google Earth Pro.
 
     Parámetros:
         ruta_kml (str): Ruta completa del archivo KML a cargar.
+        dilatador_tiempo (Float): Dilata el tiempo para que el proceso sea mas lento
 
     Retorna:
         None
@@ -21,20 +24,22 @@ def cargar_archivo_kml(ruta_kml: str):
 
     ventana = ventanas[0]
     ventana.activate()  # Activa la ventana de Google Earth Pro
-    time.sleep(5)  # Espera para asegurar la activación de la ventana
+    time.sleep(math.ceil(5*dilatador_tiempo))  # Espera para asegurar la activación de la ventana
 
     print("Abriendo cuadro de diálogo para cargar archivos...")
     pyautogui.hotkey("ctrl", "o")  # Combinación de teclas para abrir archivo
-    time.sleep(10)  # Espera para que aparezca el cuadro de diálogo
+    time.sleep(math.ceil(10*dilatador_tiempo))  # Espera para que aparezca el cuadro de diálogo
 
     print(f"Cargando archivo KML desde: {ruta_kml}")
     pyautogui.typewrite(ruta_kml)  # Escribe la ruta del archivo en el cuadro de diálogo
-    time.sleep(5)
+    time.sleep(math.ceil(5*dilatador_tiempo))
     pyautogui.press("enter")  # Presiona "Enter" para confirmar la carga
-    time.sleep(15)  # Espera a que el archivo se cargue completamente
+    time.sleep(math.ceil(15*dilatador_tiempo))  # Espera a que el archivo se cargue completamente
 
-def click_centro_vista_cenital():
+def click_centro_vista_cenital(dilatador_tiempo:float):
     """
+    Parámetros:
+        dilatador_tiempo (Float): Dilata el tiempo para que el proceso sea mas lento
     Realiza un clic en el centro de la pantalla y ajusta la vista cenital en Google Earth Pro.
 
     Retorna:
@@ -50,12 +55,12 @@ def click_centro_vista_cenital():
     print("Ajustando vista cenital...")
     for _ in range(2):
         pyautogui.press('u')  # Restablece la inclinación de la cámara
-        time.sleep(2)
+        time.sleep(math.ceil(2*dilatador_tiempo))
     for _ in range(2):
         pyautogui.press('n')  # Orienta la vista hacia el norte
-        time.sleep(1)
+        time.sleep(math.ceil(1*dilatador_tiempo))
 
-def mantener_tecla_oprimida(tecla: str, duracion: float = 1, intentos: int = 16):
+def mantener_tecla_oprimida(tecla: str, duracion: float = 1, intentos: int = 16, dilatador_tiempo:float=1):
     """
     Simula la pulsación repetida de una tecla durante un tiempo determinado.
 
@@ -63,6 +68,7 @@ def mantener_tecla_oprimida(tecla: str, duracion: float = 1, intentos: int = 16)
         tecla (str): La tecla a presionar.
         duracion (float): Duración en segundos de cada pulsación. (Por defecto 1 seg)
         intentos (int): Número de veces que se presiona la tecla. (Por defecto 16)
+        dilatador_tiempo (Float): Dilata el tiempo para que el proceso sea mas lento
 
     Retorna:
         None
@@ -73,7 +79,7 @@ def mantener_tecla_oprimida(tecla: str, duracion: float = 1, intentos: int = 16)
         time.sleep(duracion)  # Espera el tiempo indicado
         pyautogui.keyUp(tecla)  # Suelta la tecla
         print(f"Presión {i + 1} de {intentos} completada.")
-        time.sleep(0.5)  # Pausa entre intentos
+        time.sleep(round(0.5*dilatador_tiempo,2))  # Pausa entre intentos
 
 def hacer_clic_en_coordenadas(x: int, y: int):
     """
@@ -127,7 +133,8 @@ def guardado_aux_3(x_boton_file:int,
                    x_boton_save:int,
                    y_boton_save:int,
                    x_boton_save_imag:int,
-                   y_boton_save_imag:int):
+                   y_boton_save_imag:int,
+                   dilatador_tiempo:float):
     """
     Guarda datos en Google Earth Pro a través del menú de archivo.
 
@@ -136,9 +143,9 @@ def guardado_aux_3(x_boton_file:int,
     """
     print("Guardando datos mediante el menú de archivo...")
     hacer_clic_en_coordenadas(x_boton_file, y_boton_file)
-    time.sleep(4)
+    time.sleep(math.ceil(4*dilatador_tiempo))
     hacer_clic_en_coordenadas(x_boton_save, y_boton_save)
-    time.sleep(4)
+    time.sleep(math.ceil(4*dilatador_tiempo))
     hacer_clic_en_coordenadas(x_boton_save_imag, y_boton_save_imag)
-    time.sleep(4)
+    time.sleep(math.ceil(4*dilatador_tiempo))
 

@@ -3,10 +3,21 @@ import os
 import argparse
 import time
 import json
+# Import math library
+import math
 # Propias
 from src.utils.procesador import procesar_kml_y_foto
 from src.utils.init_closer import inicializador_and_config, limpiar_y_cerrar_earth, tomar_captura, obtener_fecha_hora_para_nombre
 from src.statics.diccionario_time import diccionario_tiempo
+
+# Obtener la ruta base del proyecto (subir dos niveles desde /src/utils/)
+ruta_proyecto = os.path.abspath(os.path.join(os.path.dirname(__file__), "../"))
+
+# Cargar el JSON con las rutas desde la raíz del proyecto
+with open(os.path.join(ruta_proyecto, "config_extractor.json"), "r", encoding="utf-8") as f:
+    extractor= json.load(f)
+
+
 
 # Main
 def main():
@@ -28,13 +39,26 @@ def main():
         type=int,
         help="Tipo de Guardado recistido por el Dispostivo."
     )
+    parser.add_argument(
+        "--dilatador_tiempo",
+        default=extractor['dilatador_tiempo'],
+        type=float,
+        help="Dilatardor de tiempo, valores aconsejados mayores a 1 menores 3 (Multiplica el tiempo de corrida para que la extraccion sea mas lenta)."
+    )
+    parser.add_argument(
+        "--n_fotos_ronda",
+        default=extractor['n_fotos_ronda'],
+        type=int,
+        help="Numero de fotos extraidas antes de limpiar el cache de google earth pro"
+    )
 
 
     args = parser.parse_args()
     ruta_base = args.ruta_base
     nombre_foto = args.nombre_foto
     tipo_guardado=args.tipo_guardado
-
+    dilatador_tiempo=args.dilatador_tiempo
+    n_fotos_ronda=args.n_fotos_ronda
     # Contador para saber cuántas veces procesamos una imagen
     contador_procesadas = 0
 
@@ -60,27 +84,27 @@ def main():
                     
                     # Aumentamos el contador antes de hacer nada
                     contador_procesadas += 1
-                    # Verificamos si es la iteración 1 o múltiplo de 40
+                    # Verificamos si es la iteración 1 o múltiplo de n_fotos_ronda
                     # Incia el proceso
-                    if contador_procesadas == 1 or (contador_procesadas % 40 == 0):
-                        time.sleep(5)  # Espera 5 segundos
-                        inicializador_and_config(foto_range=foto_range, tipo_guardado=tipo_guardado)
-                        time.sleep(10)  # Espera 5 segundos
+                    if contador_procesadas == 1 or (contador_procesadas % n_fotos_ronda == 0):
+                        time.sleep(math.ceil(5*dilatador_tiempo))  # Espera 5 segundos
+                        inicializador_and_config(foto_range=foto_range, tipo_guardado=tipo_guardado, dilatador_tiempo=dilatador_tiempo)
+                        time.sleep(math.ceil(10*dilatador_tiempo))  # Espera 5 segundos
                         inicio = time.time()
                         hora=obtener_fecha_hora_para_nombre()
-                        tomar_captura(ruta_destino=fr'.\data\interim\comprobador\comprobador_{nombre_foto}_{hora}.png')
+                        tomar_captura(ruta_destino=fr'.\data\interim\comprobador\comprobador_{nombre_foto}_{hora}.png',dilatador_tiempo=dilatador_tiempo)
                         with open(fr'.\data\interim\comprobador\comprobador_{nombre_foto}_{hora}.txt', "w", encoding="utf-8") as archivo:
                             # Escribimos la variable en el archivo.
                             archivo.write(str(ruta_subcarpeta))
 
                     ## Procesa los poligonos
-                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto, tipo_guardado=tipo_guardado)
+                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto, tipo_guardado=tipo_guardado, dilatador_tiempo=dilatador_tiempo)
 
-                    # cierra uno antes de los multiplos de 40.
-                    if ((contador_procesadas+1) % 40) == 0:
-                        time.sleep(5)  # Espera 5 segundos
+                    # cierra uno antes de los multiplos de n_fotos_ronda.
+                    if ((contador_procesadas+1) % n_fotos_ronda) == 0:
+                        time.sleep(math.ceil(5*dilatador_tiempo))  # Espera 5 segundos
                         limpiar_y_cerrar_earth()
-                        time.sleep(10)  # Espera 5 segundos
+                        time.sleep(math.ceil(10*dilatador_tiempo))  # Espera 5 segundos
                         fin = time.time()
                         total=fin-inicio
                         dicci_time={'inicio':inicio,
