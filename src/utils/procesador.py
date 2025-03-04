@@ -59,7 +59,11 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardad
         mantener_tecla_oprimida('=', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
     else:
         print("Haciendo clic en botón específico '+' ...")
-        mantener_tecla_oprimida('+', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
+        
+        for i in range(16):
+            pyautogui.press('+')
+            print(f"Presión {i + 1} de {16} completada.")
+            time.sleep(round(0.5*dilatador_tiempo,2))  # Pausa entre intentos
 
     print("Ajustando vista cenital nuevamente...")
     click_centro_vista_cenital(dilatador_tiempo=dilatador_tiempo)
