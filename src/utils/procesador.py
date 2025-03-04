@@ -9,7 +9,7 @@ import math
 from src.utils.helpers import cargar_archivo_kml, click_centro_vista_cenital, mantener_tecla_oprimida, hacer_clic_en_coordenadas,guardado_aux, guardado_aux_2, guardado_aux_3
 from src.utils.cordenadas import x_cierre_navegacion_foto,y_cierre_navegacion_foto, x_guardado_imagen,y_guardado_imagen, x_boton_file,y_boton_file, x_boton_save,y_boton_save,x_boton_save_imag,y_boton_save_imag
 
-def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1, dilatador_tiempo=1):
+def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardado=1, dilatador_tiempo=1, tipo_zoom=1):
     """
     Procesa un archivo KML en Google Earth Pro, ajusta la vista y guarda una imagen.
 
@@ -18,6 +18,7 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardad
         nombre_foto (str, opcional): Nombre del archivo de la foto a cargar. 
                                      Por defecto, "2022_5".
         tipo_guardado (int,optiona): tipo de Guardado
+        Tipo zoom (int): Tipo de zoom
 
     Proceso:
         - Genera las rutas del archivo KML y la foto.
@@ -54,7 +55,11 @@ def procesar_kml_y_foto(ruta_base: str, nombre_foto: str = "2022_5",tipo_guardad
     click_centro_vista_cenital(dilatador_tiempo=dilatador_tiempo)
 
     print("Aumentando zoom con tecla '='...")
-    mantener_tecla_oprimida('=', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
+    if tipo_zoom==1:
+        mantener_tecla_oprimida('=', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
+    else:
+        print("Haciendo clic en botón específico '+' ...")
+        mantener_tecla_oprimida('+', duracion=1, intentos=16,dilatador_tiempo=dilatador_tiempo )
 
     print("Ajustando vista cenital nuevamente...")
     click_centro_vista_cenital(dilatador_tiempo=dilatador_tiempo)

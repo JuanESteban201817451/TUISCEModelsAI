@@ -51,6 +51,12 @@ def main():
         type=int,
         help="Numero de fotos extraidas antes de limpiar el cache de google earth pro"
     )
+    parser.add_argument(
+        "--tipo_zoom",
+        default=1,
+        type=int,
+        help="Tecla a espichar para el zoom"
+    )
 
 
     args = parser.parse_args()
@@ -59,6 +65,7 @@ def main():
     tipo_guardado=args.tipo_guardado
     dilatador_tiempo=args.dilatador_tiempo
     n_fotos_ronda=args.n_fotos_ronda
+    tipo_zoom=args.tipo_zoom
     # Contador para saber cuántas veces procesamos una imagen
     contador_procesadas = 0
 
@@ -98,7 +105,7 @@ def main():
                             archivo.write(str(ruta_subcarpeta))
 
                     ## Procesa los poligonos
-                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto, tipo_guardado=tipo_guardado, dilatador_tiempo=dilatador_tiempo)
+                    procesar_kml_y_foto(ruta_subcarpeta, nombre_foto, tipo_guardado=tipo_guardado, dilatador_tiempo=dilatador_tiempo, tipo_zoom=tipo_zoom)
 
                     # cierra uno antes de los multiplos de n_fotos_ronda.
                     if ((contador_procesadas+1) % n_fotos_ronda) == 0:
